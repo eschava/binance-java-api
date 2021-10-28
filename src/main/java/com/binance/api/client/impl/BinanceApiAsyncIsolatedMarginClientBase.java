@@ -13,11 +13,7 @@ import com.binance.api.client.domain.account.MarginNewOrderResponse;
 import com.binance.api.client.domain.account.MarginTransaction;
 import com.binance.api.client.domain.account.Order;
 import com.binance.api.client.domain.account.Trade;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginAccountInfo;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginSymbol;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginTransfer;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginTransferResult;
-import com.binance.api.client.domain.account.isolated.NewIsolatedAccountResponse;
+import com.binance.api.client.domain.account.isolated.*;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
@@ -83,6 +79,10 @@ public class BinanceApiAsyncIsolatedMarginClientBase {
   public Call<MarginTransaction> repay(String asset, String symbol, String amount) {
     return binanceApiService.repay(asset, IS_ISOLATED, symbol, amount, BinanceApiConstants.DEFAULT_MARGIN_RECEIVING_WINDOW,
         currentTimeMillis());
+  }
+
+  public Call<IsolatedMarginMaxTransferableResult> maxTransferable(String asset, String isolatedSymbol) {
+    return binanceApiService.maxTransferable(asset, isolatedSymbol, DEFAULT_RECEIVING_WINDOW, currentTimeMillis());
   }
 
   public Call<IsolatedMarginTransferResult> transfer(IsolatedMarginTransfer transfer) {

@@ -306,7 +306,7 @@ public interface BinanceApiService {
 
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
   @GET("/sapi/v1/margin/maxBorrowable")
-  Call<MaxBorrowableQueryResult> queryMaxBorrowable(@Query("asset") String asset, @Query("isIsolated") String isIsolated, @Query("timestamp") Long timestamp);
+  Call<MaxBorrowableQueryResult> queryMaxBorrowable(@Query("asset") String asset, @Query("isolatedSymbol") String isolatedSymbol, @Query("timestamp") Long timestamp);
 
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
   @GET("/sapi/v1/margin/repay")

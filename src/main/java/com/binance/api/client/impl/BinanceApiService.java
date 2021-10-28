@@ -32,10 +32,7 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginAccountInfo;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginSymbol;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginTransferResult;
-import com.binance.api.client.domain.account.isolated.NewIsolatedAccountResponse;
+import com.binance.api.client.domain.account.isolated.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.SubAccountTransfer;
 import com.binance.api.client.domain.event.ListenKey;
@@ -262,6 +259,10 @@ public interface BinanceApiService {
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
   @GET("/sapi/v1/margin/isolated/account")
   Call<IsolatedMarginAccountInfo> queryIsolatedMarginAccount(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+  @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+  @GET("/sapi/v1/margin/maxTransferable")
+  Call<IsolatedMarginMaxTransferableResult> maxTransferable(@Query("asset") String asset, @Query("isolatedSymbol") String isolatedSymbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
   @POST("/sapi/v1/margin/isolated/transfer")

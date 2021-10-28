@@ -8,11 +8,7 @@ import com.binance.api.client.domain.account.MarginNewOrderResponse;
 import com.binance.api.client.domain.account.MarginTransaction;
 import com.binance.api.client.domain.account.Order;
 import com.binance.api.client.domain.account.Trade;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginAccountInfo;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginSymbol;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginTransfer;
-import com.binance.api.client.domain.account.isolated.IsolatedMarginTransferResult;
-import com.binance.api.client.domain.account.isolated.NewIsolatedAccountResponse;
+import com.binance.api.client.domain.account.isolated.*;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
@@ -62,6 +58,14 @@ public interface BinanceApiIsolatedMarginClient {
    * @return a list of trades
    */
   List<Trade> getMyTrades(String symbol);
+
+  /**
+   * Query max transfer-out amount
+   *
+   * @param asset
+   * @param isolatedSymbol isolated symbol
+   */
+  IsolatedMarginMaxTransferableResult maxTransferable(String asset, String isolatedSymbol);
 
   /**
    * Transfers funds between spot and isolated margin account (account must be

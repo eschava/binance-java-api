@@ -16,5 +16,6 @@ public class IsolatedMarginAccount {
   String liquidatePrice;
   String liquidateRate;
   boolean tradeEnabled;
+  boolean enabled;
 
 }

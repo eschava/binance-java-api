@@ -14,6 +14,8 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.futures.FuturesTransferResult;
+import com.binance.api.client.domain.account.futures.FuturesTransferType;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -343,4 +345,5 @@ public interface BinanceApiRestClient {
    */
   DustTransferResponse convertDustToBnb(List<String> assets);
 
+  FuturesTransferResult futuresTransfer(String asset, String amount, FuturesTransferType transferType);
 }

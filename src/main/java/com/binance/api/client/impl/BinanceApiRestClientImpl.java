@@ -22,6 +22,8 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.futures.FuturesTransferType;
+import com.binance.api.client.domain.account.futures.FuturesTransferResult;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -294,5 +296,10 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   @Override
   public void closeUserDataStream(String listenKey) {
     executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
+  }
+
+  @Override
+  public FuturesTransferResult futuresTransfer(String asset, String amount, FuturesTransferType transferType) {
+    return executeSync(binanceApiService.futuresTransfer(asset, amount, transferType.getValue(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, currentTimeMillis()));
   }
 }

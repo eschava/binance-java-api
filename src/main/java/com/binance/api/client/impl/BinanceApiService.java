@@ -32,6 +32,7 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.futures.FuturesTransferResult;
 import com.binance.api.client.domain.account.isolated.IsolatedMarginAccountInfo;
 import com.binance.api.client.domain.account.isolated.IsolatedMarginSymbol;
 import com.binance.api.client.domain.account.isolated.IsolatedMarginTransferResult;
@@ -433,4 +434,13 @@ public interface BinanceApiService {
           @Query("recvWindow") Long recvWindow,
           @Query("timestamp") Long timestamp);
 
+
+  @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+  @POST("/sapi/v1/futures/transfer")
+  Call<FuturesTransferResult> futuresTransfer(
+          @Query("asset") String asset,
+          @Query("amount") String amount,
+          @Query("type") String type,
+          @Query("recvWindow") Long recvWindow,
+          @Query("timestamp") Long timestamp);
 }

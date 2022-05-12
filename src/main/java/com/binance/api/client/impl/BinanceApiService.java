@@ -250,8 +250,12 @@ public interface BinanceApiService {
 
   // Isolated Margin Account endpoints
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
-  @POST("/sapi/v1/margin/isolated/create")
-  Call<NewIsolatedAccountResponse> createIsolatedMarginAccount(@Query("base") String base, @Query("quote") String quote, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+  @POST("/sapi/v1/margin/isolated/account")
+  Call<IsolatedAccountResponse> createIsolatedMarginAccount(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+  @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+  @DELETE("/sapi/v1/margin/isolated/account")
+  Call<IsolatedAccountResponse> deleteIsolatedMarginAccount(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
   @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
   @GET("/sapi/v1/margin/isolated/account")

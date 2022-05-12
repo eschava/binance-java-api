@@ -17,7 +17,9 @@ import com.binance.api.client.domain.event.ListenKey;
 
 public interface BinanceApiAsyncIsolatedMarginClient {
 
-  void createAccount(String base, String quote, BinanceApiCallback<NewIsolatedAccountResponse> cb);
+  void createAccount(String symbol, BinanceApiCallback<IsolatedAccountResponse> cb);
+
+  void deleteAccount(String symbol, BinanceApiCallback<IsolatedAccountResponse> cb);
 
   void queryAccount(Optional<List<String>> symbols, BinanceApiCallback<IsolatedMarginAccountInfo> cb);
 

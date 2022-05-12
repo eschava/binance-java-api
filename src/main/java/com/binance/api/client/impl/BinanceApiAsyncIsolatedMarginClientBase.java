@@ -25,19 +25,24 @@ import retrofit2.Call;
 public class BinanceApiAsyncIsolatedMarginClientBase {
 
   private static final String IS_ISOLATED = "TRUE";
-  private BinanceApiService binanceApiService;
+
+  private final BinanceApiService binanceApiService;
 
   public BinanceApiAsyncIsolatedMarginClientBase(String apiKey, String secret) {
     binanceApiService = ApiServiceGenerator.createService(BinanceApiService.class, apiKey, secret);
   }
 
-  public Call<NewIsolatedAccountResponse> createAccount(String base, String quote) {
-    return binanceApiService.createIsolatedMarginAccount(base, quote, DEFAULT_RECEIVING_WINDOW, currentTimeMillis());
+  public Call<IsolatedAccountResponse> createAccount(String symbol) {
+    return binanceApiService.createIsolatedMarginAccount(symbol, DEFAULT_RECEIVING_WINDOW, currentTimeMillis());
+  }
+
+  public Call<IsolatedAccountResponse> deleteAccount(String symbol) {
+    return binanceApiService.deleteIsolatedMarginAccount(symbol, DEFAULT_RECEIVING_WINDOW, currentTimeMillis());
   }
 
   public Call<IsolatedMarginAccountInfo> queryAccount(Optional<List<String>> symbols) {
     if (symbols.isPresent()) {
-      String ss = symbols.get().stream().collect(joining(","));
+      String ss = String.join(",", symbols.get());
       return binanceApiService.queryIsolatedMarginAccount(ss, DEFAULT_RECEIVING_WINDOW, currentTimeMillis());
     } else {
       return binanceApiService.queryIsolatedMarginAccount(DEFAULT_RECEIVING_WINDOW, currentTimeMillis());

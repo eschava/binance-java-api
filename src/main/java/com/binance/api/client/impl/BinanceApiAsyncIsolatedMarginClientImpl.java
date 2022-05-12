@@ -19,15 +19,20 @@ import com.binance.api.client.domain.event.ListenKey;
 
 public class BinanceApiAsyncIsolatedMarginClientImpl implements BinanceApiAsyncIsolatedMarginClient {
 
-  private BinanceApiAsyncIsolatedMarginClientBase clientBase;
+  private final BinanceApiAsyncIsolatedMarginClientBase clientBase;
 
   public BinanceApiAsyncIsolatedMarginClientImpl(String apiKey, String secret) {
     clientBase = new BinanceApiAsyncIsolatedMarginClientBase(apiKey, secret);
   }
 
   @Override
-  public void createAccount(String base, String quote, BinanceApiCallback<NewIsolatedAccountResponse> cb) {
-    clientBase.createAccount(base, quote).enqueue(new BinanceApiCallbackAdapter<>(cb));
+  public void createAccount(String symbol, BinanceApiCallback<IsolatedAccountResponse> cb) {
+    clientBase.createAccount(symbol).enqueue(new BinanceApiCallbackAdapter<>(cb));
+  }
+
+  @Override
+  public void deleteAccount(String symbol, BinanceApiCallback<IsolatedAccountResponse> cb) {
+    clientBase.deleteAccount(symbol).enqueue(new BinanceApiCallbackAdapter<>(cb));
   }
 
   @Override

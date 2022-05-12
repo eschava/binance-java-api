@@ -7,9 +7,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class TrailingDeltaFilter extends SymbolFilter {
 
-  int minTrailingAboveDelta;
-  int maxTrailingAboveDelta;
-  int minTrailingBelowDelta;
-  int maxTrailingBelowDelta;
+  String minTrailingAboveDelta;
+  String maxTrailingAboveDelta;
+  String minTrailingBelowDelta;
+  String maxTrailingBelowDelta;
 
 }

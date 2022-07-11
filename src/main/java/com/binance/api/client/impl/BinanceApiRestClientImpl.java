@@ -10,20 +10,9 @@ import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderType;
 import com.binance.api.client.domain.TimeInForce;
-import com.binance.api.client.domain.account.Account;
-import com.binance.api.client.domain.account.DepositAddress;
-import com.binance.api.client.domain.account.DepositHistory;
-import com.binance.api.client.domain.account.DustTransferResponse;
-import com.binance.api.client.domain.account.NewOrder;
-import com.binance.api.client.domain.account.NewOrderResponse;
-import com.binance.api.client.domain.account.OcoOrderResponse;
-import com.binance.api.client.domain.account.Order;
-import com.binance.api.client.domain.account.Trade;
-import com.binance.api.client.domain.account.TradeHistoryItem;
-import com.binance.api.client.domain.account.WithdrawHistory;
-import com.binance.api.client.domain.account.WithdrawResult;
-import com.binance.api.client.domain.account.futures.FuturesTransferType;
-import com.binance.api.client.domain.account.futures.FuturesTransferResult;
+import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.futures.TransferType;
+import com.binance.api.client.domain.account.futures.TransferResult;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -299,7 +288,12 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   }
 
   @Override
-  public FuturesTransferResult futuresTransfer(String asset, String amount, FuturesTransferType transferType) {
-    return executeSync(binanceApiService.futuresTransfer(asset, amount, transferType.getValue(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, currentTimeMillis()));
+  public TransferResult universalTransfer(TransferType transferType, String asset, String amount, String fromSymbol, String toSymbol) {
+    return executeSync(binanceApiService.universalTransfer(transferType.getValue(), asset, amount, fromSymbol, toSymbol, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, currentTimeMillis()));
+  }
+
+  @Override
+  public List<FundingAsset> getFundingAsset(String asset, boolean needBtcValuation) {
+    return executeSync(binanceApiService.getFundingAsset(asset, needBtcValuation, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, currentTimeMillis()));
   }
 }
